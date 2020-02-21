@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      .winner {
+        color: green;
+        font-size: 40px;
+      }
+    </style>
+    <title>Score Keeper</title>
+  </head>
+  <body>
+    <h1><span id="score_p1">0</span> to <span id="score_p2">0</span></h1>
+    <p>Playing to: <span id="totalPoints">5</span></p>
+    <input type="number" min="0" step="1" positive />
+    <button id="p1">Player 1</button>
+    <button id="p2">player 2</button>
+    <button id="reset">reset</button>
+    <script src="scoreKeeper.js"></script>
+  </body>
+</html>

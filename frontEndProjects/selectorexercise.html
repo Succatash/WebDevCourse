@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Document</title>
+  </head>
+  <style>
+    .purple {
+      background: purple;
+    }
+  </style>
+  <body>
+    <h1>I am an h1!</h1>
+    <p id="first" class="special">Hello</p>
+    <p class="special">Goodby</p>
+    <p>Hi Again</p>
+    <p id="last">Goodbye <em> Again</em></p>
+    <a href="wwww.freecodecamp.org">test</a>
+    <ul>
+      <li>LIS 1</li>
+      <li>LIS 2</li>
+      <li>LIS 3</li>
+    </ul>
+    <button>click me</button>
+    <script>
+      //selecting
+      let tags = document.getElementsByClassName("special")[0];
+      let p = document.querySelector("p");
+      let p_tag = document.querySelector("#first");
+      let last = document.getElementById("last");
+      //since we get a node list to target specific node we use the index in the given array
+      let p_tags = document.querySelectorAll(".special")[0];
+      let special = document.querySelector(".special");
+
+      let tag = document.getElementById("first");
+      let h1 = document.querySelector("h1");
+      let ul = document.querySelector("ul");
+      let lis = document.querySelectorAll("li");
+
+      //this is one way to do a event
+      function changeFontSize() {
+        h1.style.fontSize = "34px";
+      }
+      h1.addEventListener("mouseover", changeFontSize);
+
+      // you can also do
+
+      h1.addEventListener("click", function() {
+        h1.style.fontSize = h1.style.fontSize === "32px" ? "20px" : "32px";
+      });
+      //loops for lis
+      for (let i = 0; i < lis.length; i++) {
+        lis[i].addEventListener("click", function() {
+          this.style.color = this.style.color === "blue" ? "black" : "blue";
+        });
+      }
+
+      //to manipulate for css we use element.style.css attribute can use bracket or dot notation. marginTop and others are in camel case
+
+      // variable name.style will show you all the different things you can manipulate for that variable
+      tag["style"].color = "darkgreen";
+      tag.style.border = "1px solid red";
+      tag.style.fontSize = "20px";
+      tag["style"].background = "#2d64";
+      tag.style.marginTop = "50px";
+
+      //Manipulate text with textContent
+
+      tag.textContent =
+        "Changed this text with element.textContent['Changed this']";
+      // innerHtml will show us any tags like em or bold
+
+      // since we get a node list to target specific node we use the index in the given array
+
+      //getAttribute() and setAttribute() can change href src or other attributes
+
+      let link = document.querySelector("a");
+      link.getAttribute("href"); //#first
+      //this changes the href in the a attribute, can do the same thing for src
+      //need to use http:// to take you to actual website
+      link.setAttribute("href", "http://www.google.com");
+      link.textContent = "link to google";
+      link.style.textDecoration = "none";
+      link.addEventListener("mouseover", function() {
+        link.style.color = "green";
+      });
+
+      //instead of mainpulating css with JS it is better to create a class in CSS and then use JS to add remove or toggle
+
+      // ele.classList.add("class name here");
+      // ele.classList.remove("class name here");
+      // ele.classList.toggle("class name here");
+    </script>
+    <script src="colorexercise.js"></script>
+  </body>
+</html>

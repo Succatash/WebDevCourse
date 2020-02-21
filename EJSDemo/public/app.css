@@ -1,0 +1,11 @@
+body {
+  color: red;
+  background-color: aqua;
+}
+
+.div-block {
+  border: 2pt solid black;
+}
+li {
+  list-style-type: none;
+}

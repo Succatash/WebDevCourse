@@ -1,0 +1,17 @@
+<!--Include partial header template-->
+<%- include("partial/header") %>
+
+<h1>You fell in love with: <%= thing.toUpperCase() %></h1>
+
+<!--have to rap each line individually in the tags-->
+<!--  the equal sign adds to the html, without the equal sign sign it is just logic and just run the code-->
+<% if(thing.toLowerCase() === 'rusty'){ %>
+<p>Good Choice! Rusty is the best!</p>
+<% } else { %>
+<p>Bad choice should have said Rusty Bizatch</p>
+<% } %>
+
+<p>P.S. this is the love.ejs file</p>
+
+<%- include("partial/footer") %>
+<!--Include partial footer template-->
