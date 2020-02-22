@@ -19,27 +19,53 @@ mongoose
 const catSchema = new mongoose.Schema({
   name: String,
   age: Number,
-  tempermeant: String
+  temperament: String
 });
 
 const Cat = mongoose.model("Cat", catSchema);
 
-let george = new Cat({ name: "george", age: 11, tempermeant: "grouchy" });
+//adding a new cat to Db,
 
-george.save(
-  //callback function, normal pattern for mongoose
+//this is a 2 step process added then saved
+
+// let george = new Cat({ name: "Mrs. Norris", age: 7, tempermeant: "Evil" });
+
+// george.save(
+//   //callback function, normal pattern for mongoose
+//   function callback(err, cat) {
+//     if (err) {
+//       console.log("something went wrong");
+//     } else {
+//       console.log("We Just Saved The Cats to the DB");
+//       console.log(cat);
+//     }
+//   }
+// );
+
+//another way to create, this merges the 2 from above first creating, then a callback function to let us know that it worked
+Cat.create(
+  {
+    name: "Snow White",
+    age: 15,
+    temperament: "Bland"
+  },
   (err, cat) => {
     if (err) {
       console.log("something went wrong");
     } else {
-      console.log("We Just Saved The Cat to the DB");
+      console.log("We Just Saved The Cats to the DB");
       console.log(cat);
     }
   }
 );
 
-//adding a new cat to Db, then retrieve all cats from db
-
-// app.listen(port, () => {
-//   console.log("Example app listening on port 3000");
-// });
+// retrieve all cats from db
+Cat.find({}, (err, cats) => {
+  if (err) {
+    console.log("OHH NOO");
+    console.log(err);
+  } else {
+    console.log(cats);
+    console.log("All The Cats.....");
+  }
+});
