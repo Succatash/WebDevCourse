@@ -27,16 +27,17 @@ const Cat = mongoose.model("Cat", catSchema);
 let george = new Cat({ name: "george", age: 11, tempermeant: "grouchy" });
 
 george.save(
-  //callback function
+  //callback function, normal pattern for mongoose
   (err, cat) => {
     if (err) {
       console.log("something went wrong");
     } else {
-      console.log("We Just Save The Cates");
+      console.log("We Just Saved The Cat to the DB");
       console.log(cat);
     }
   }
 );
+
 //adding a new cat to Db, then retrieve all cats from db
 
 // app.listen(port, () => {
