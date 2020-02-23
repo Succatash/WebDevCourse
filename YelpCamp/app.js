@@ -1,60 +1,31 @@
-const express = require("express");
-const app = express();
+const express = require("express"),
+  app = express(),
+  bodyParser = require("body-parser"),
+  mongoose = require("mongoose");
 
-const bodyParser = require("body-parser");
+//MongoDb and Database
+mongoose
+  .connect("mongodb://localhost/yelpCamp", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => console.log("DB Connected!"))
+  .catch(err => {
+    console.log(`DB Connection Error:${err.message}`);
+  });
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = 3000;
 
-let campgroundsValue = [
-  {
-    name: " Salmon_Creek",
-    image:
-      "https://pixabay.com/get/57e1d3404e53a514f6da8c7dda793f7f1636dfe2564c704c7d2e7bd79749c451_340.jpg"
-  },
-  {
-    name: "Big Bobs",
-    image:
-      "https://pixabay.com/get/52e8d4404253ab14f6da8c7dda793f7f1636dfe2564c704c7d2e7bd79749c451_340.jpg"
-  },
+//SCHEMA SETUP
+const campgroundSchema = new mongoose.Schema({
+  name: String,
+  image: String
+});
 
-  {
-    name: "Granite Hill",
-    image:
-      "https://pixabay.com/get/55e4d5454b51ab14f6da8c7dda793f7f1636dfe2564c704c7d2e7bd79749c451_340.jpg"
-  },
-  {
-    name: "Mountain Goats Rest",
-    image:
-      "https://pixabay.com/get/55e7d24a485aac14f6da8c7dda793f7f1636dfe2564c704c7d2e7bd79749c451_340.jpg"
-  },
-  {
-    name: "Big Bobs",
-    image:
-      "https://pixabay.com/get/52e8d4404253ab14f6da8c7dda793f7f1636dfe2564c704c7d2e7bd79749c451_340.jpg"
-  },
-  {
-    name: " Salmon_Creek",
-    image:
-      "https://pixabay.com/get/57e1d3404e53a514f6da8c7dda793f7f1636dfe2564c704c7d2e7bd79749c451_340.jpg"
-  },
-  {
-    name: "Big Bobs",
-    image:
-      "https://pixabay.com/get/52e8d4404253ab14f6da8c7dda793f7f1636dfe2564c704c7d2e7bd79749c451_340.jpg"
-  },
-  {
-    name: "Mountain Goats Rest",
-    image:
-      "https://pixabay.com/get/55e7d24a485aac14f6da8c7dda793f7f1636dfe2564c704c7d2e7bd79749c451_340.jpg"
-  },
-
-  {
-    name: "Granite Hill",
-    image:
-      "https://pixabay.com/get/55e4d5454b51ab14f6da8c7dda793f7f1636dfe2564c704c7d2e7bd79749c451_340.jpg"
-  }
-];
+//
+const Campground = mongoose.model("Campground", campgroundSchema);
 
 app.set("view engine", "ejs");
 app.get("/", (req, res) => {
@@ -62,7 +33,16 @@ app.get("/", (req, res) => {
 });
 
 app.get("/campgrounds", (req, res) => {
-  res.render("campground", { campgroundsKey: campgroundsValue });
+  //get all campgrounds from DB, then render the file
+
+  Campground.find({}, (err, allCampgrounds) => {
+    if (err) {
+      console.log(err);
+      // console.log();
+    } else {
+      res.render("campground", { campgroundsKey: allCampgrounds });
+    }
+  });
 });
 
 //req has to go before res
@@ -71,9 +51,16 @@ app.post("/campgrounds", (req, res) => {
   let image = req.body.image;
   // We create a object with name and image because it eqals are name attribute on the input tags
   let newCampground = { name: name, image: image };
-  campgroundsValue.push(newCampground);
+  //Create a new campground and save to DB
+  Campground.create(newCampground, (err, newlyCreaated) => {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/campgrounds");
+    }
+  });
+
   // /camogrounds is a GET instead of the post above
-  res.redirect("/campgrounds");
 });
 //get data from form and add to campgrounds array
 //redirect back to campgrounds
