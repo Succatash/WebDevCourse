@@ -92,10 +92,15 @@ app.get("/campgrounds/new", (req, res) => {
 
 //SHOW - shows more info about one campground
 app.get("/campgrounds/:id", (req, res) => {
-  //find campground with given ID
-
-  //render show template with that campground
-  res.render("show");
+  // find campground with given ID
+  Campground.findById(req.params.id, (err, foundCampground) => {
+    if (err) {
+      console.log(err);
+    } else {
+      //  render show template with that campground
+      res.render("show", { campground: foundCampground });
+    }
+  });
 });
 
 app.listen(port, () => {
