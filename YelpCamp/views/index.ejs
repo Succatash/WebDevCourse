@@ -26,11 +26,18 @@
 
   <% campgroundsKey.forEach((campgrounds)=>{%>
 
-    <div class="col-md-3 col-sm-8">
-      <div class="thumbnails">
+    <div class="col-lg-3 col-md-3 col-sm-8">
+      <div class="card">
         <img class="img-card img-fluid" src="<%= campgrounds.image%>"/>
         <div class="caption">
           <h4 ><%= campgrounds.name %> </h4>
+          <p>
+            <a
+             href="/campgrounds/
+             <%= campgrounds._id%>" class="btn btn-primary">More Info
+    
+            </a> 
+          </p>
         </div>
       </div>
     </div>

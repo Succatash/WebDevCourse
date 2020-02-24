@@ -29,22 +29,22 @@ const campgroundSchema = new mongoose.Schema({
 
 const Campground = mongoose.model("Campground", campgroundSchema);
 
-Campground.create(
-  {
-    name: "Granite Hill",
-    image:
-      "https://images.unsplash.com/photo-1486179814561-91c2d61316b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=60",
-    description: "A nice Granite Mountain good for hiking!!"
-  },
-  (err, allCampgrounds) => {
-    if (err) {
-      console.log(err);
-      // console.log();
-    } else {
-      console.log("worked");
-    }
-  }
-);
+// Campground.create(
+//   {
+//     name: "Granite Hill",
+//     image:
+//       "https://images.unsplash.com/photo-1486179814561-91c2d61316b4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1400&q=60",
+//     description: "A nice Granite Mountain good for hiking!!"
+//   },
+//   (err, allCampgrounds) => {
+//     if (err) {
+//       console.log(err);
+//       // console.log();
+//     } else {
+//       console.log("worked");
+//     }
+//   }
+// );
 
 app.set("view engine", "ejs");
 app.get("/", (req, res) => {
@@ -59,7 +59,7 @@ app.get("/campgrounds", (req, res) => {
       console.log(err);
       // console.log();
     } else {
-      res.render("campground", { campgroundsKey: allCampgrounds });
+      res.render("index", { campgroundsKey: allCampgrounds });
     }
   });
 });
@@ -68,10 +68,11 @@ app.get("/campgrounds", (req, res) => {
 app.post("/campgrounds", (req, res) => {
   let name = req.body.name;
   let image = req.body.image;
+  let description = req.body.description;
   // We create a object with name and image because it eqals are name attribute on the input tags
-  let newCampground = { name: name, image: image };
+  let newCampground = { name: name, image: image, description: description };
   //Create a new campground and save to DB
-  Campground.create(newCampground, (err, newlyCreaated) => {
+  Campground.create(newCampground, (err, newlyCreated) => {
     if (err) {
       console.log(err);
     } else {
@@ -86,12 +87,15 @@ app.post("/campgrounds", (req, res) => {
 
 //NEW-show form to create new campground
 app.get("/campgrounds/new", (req, res) => {
-  res.render("new.ejs");
+  res.render("new");
 });
 
-app.get("/campgrounds:id", (req, res) => {
+//SHOW - shows more info about one campground
+app.get("/campgrounds/:id", (req, res) => {
   //find campground with given ID
-  res.send("THIS WILL BE THE SHOW PAGE ONE DAY");
+
+  //render show template with that campground
+  res.render("show");
 });
 
 app.listen(port, () => {
