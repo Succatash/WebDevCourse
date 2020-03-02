@@ -1,8 +1,11 @@
 <%- include("partials/header") %>
 
-<h3><%= campground.name %><h3>
+<h3>
+	<%= campgrounds.name %>
+	<h3>
+		<img src="<%= campgrounds.image %>" alt="" />
+		<p><%= campgrounds.description%></p>
 
-  <img src="<%= campground.image %>" alt="">
-  <p><%= campground.description%></p>
-
-  <%- include("partials/footer") %>
+		<%- include("partials/footer") %>
+	</h3>
+</h3>
