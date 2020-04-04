@@ -7,10 +7,16 @@
     </div>
     <div class="item">
       <span><%= blog.created.toDateString()%></span>
-      <div class="description">\<!--the - sign allows are body to read html-->
+      <div class="description"><!--the - sign allows are body to read html-->
         <p><%- blog.body %></p>
       </div>
+      <a id="delete" href="/blogs/<%blog._id%>" class="ui purple inverted button">EDIT</a>
+        <form id="delete" action="/blogs/<%= blog._id%>?_method=DELETE" method="POST">
+          <button class="ui red basic button">Delete</button>
+        </form>
 
+        
+        
   </div>
 </div>
 

@@ -9,3 +9,7 @@ i.icon {
 div.ui.huge.header {
 	text-align: center;
 }
+
+#delete {
+	display: inline;
+}

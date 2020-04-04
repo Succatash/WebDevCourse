@@ -1,16 +1,40 @@
 <%- include("partials/header")%>
-<% blogs.forEach((blog)=> {%>
-<div>
-	<div class="ui container">
-		<img src="<%= blog.image %>" alt="<%= blog.altTag %>" />
-		<div class="ui container">
-    <span><%= blog.created.toDateString()%></span>
-		<p><%= blog.body.substring(0,100) %>...</p>
-		<a id='readMore' href="/blogs/<%=blog._id %>">Read More</a>
-	</div>
+
+<div class="ui main text container">
+	<div class="ui huge header">Restful Blog App</div>
+
+<div class="ui top attached segment">
+
+<div class="ui divided items">
+	<% blogs.forEach((blog)=> {%>
+		<div class="item">
+			<div class="image">
+				<img src="<%= blog.image %>" alt="<%= blog.altTag %>" />
+			</div>
+		</div>
+
+		<div class="content">
+			<a class="header" href="/blogs/<%=blog._id %><%=blog.title%>" ></a>
+
+			<div class="meta">
+				<span><%= blog.created.toDateString()%></span>
+			</div>
+
+			<div class="description">
+				<p><%- blog.body.substring(0,100) %>...</p>
+			</div>
+
+			<div class="extra">
+				<a class="ui floated basic violet button" href="/blogs/<%=blog._id%>">Read More
+					<i class="right chevron icon"></i>
+				  </a>
+			</div>
+		</div>
+		<%})%>
+		</div>
 	</div>
 </div>
 
-<%})%>
+	
 <!--prettier-ignore-->
 <%- include("partials/footer")%>
