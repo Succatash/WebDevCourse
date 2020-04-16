@@ -5,16 +5,15 @@ const express = require("express"),
 	passport = require("passport"),
 	localStrategy = require("passport-local"),
 	Campgrounds = require("./models/campground");
-(Comment = require("./models/comment")),
-	(User = require("./models/user")),
-	(seedDB = require("./seeds"));
+(Comment = require("./models/comment")), (User = require("./models/user"));
+seedDB = require("./seeds");
 // passportLocalMongoose = require("passport-local-mogoose");
 
 const commentsRoutes = require("./routes/comments"),
 	campgroundRoutes = require("./routes/campgrounds"),
 	indexRoutes = require("./routes/index");
 
-seedDB();
+// seedDB();
 
 //MongoDb and Database
 mongoose

@@ -19,7 +19,7 @@ router.get("/", (req, res) => {
 			// console.log();
 		} else {
 			res.render("campgrounds/index", {
-				campgroundsKey: allCampgrounds,
+				campgroundsKey: allCampgrounds
 			});
 		}
 	});
@@ -27,28 +27,34 @@ router.get("/", (req, res) => {
 //add new campground to DB
 
 //Create Route -
-router.post("/", (req, res) => {
+router.post("/", isLoggedIn, (req, res) => {
 	let name = req.body.name;
 	let image = req.body.image;
-	let description = req.body.description;
+	let desc = req.body.description;
 	// We create a object with name and image because it eqals are name attribute on the input tags
+	const author = {
+		id: req.user._id,
+		username: req.user.username
+	};
 	let newCampground = {
 		name: name,
 		image: image,
-		description: description,
+		description: desc,
+		author: author
 	};
 	//Create a new campground and save to DB
 	Campground.create(newCampground, (err, newlyCreated) => {
 		if (err) {
 			console.log(err);
 		} else {
+			console.log(newlyCreated);
 			res.redirect("/campgrounds");
 		}
 	});
 });
 
 //NEW-show form to create new campground
-router.get("//new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
 	res.render("campgrounds/new");
 });
 
