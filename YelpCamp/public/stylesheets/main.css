@@ -1,0 +1,14 @@
+.thumbnail img {
+	width: 100%;
+}
+.thumbnail #campgroundsThumbails img {
+	max-height: 11em;
+}
+
+.thumbnail {
+	padding: 0%;
+}
+
+.thumbnail .caption-full {
+	padding: 9px;
+}

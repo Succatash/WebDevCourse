@@ -27,23 +27,24 @@ async function seedDB() {
 	//Remove all campgrounds
 	await Comment.deleteMany({});
 	console.log("camground removed");
+
 	await Campground.deleteMany({});
 	console.log("comments removed");
+
 	//loop thru seeds
-	for (const seed of seeds) {
-		Campground.create(seed);
-		console.log("campground created");
-		let campground = await Campground.create(seed);
-		console.log("comment created");
-		let comment = await Comment.create({
-			text: "This place is great, but I wish there was internet",
-			author: "Homer",
-		});
-		//push comment to campground
-		campground.comments.push(comment);
-		//save campground
-		campground.save();
-		console.log("Comment added to campground");
-	}
+	// for (const seed of seeds) {
+	// 	let campground = await Campground.create(seed);
+	// 	console.log("campground created");
+	// 	let comment = await Comment.create({
+	// 		text: "This place is great, but I wish there was internet",
+	// 		author: "Homer",
+	// 	});
+	// 	//push comment to campground
+	// 	console.log("comment created");
+	// 	campground.comments.push(comment);
+	// 	//save campground
+	// 	campground.save();
+	// 	console.log("Comment added to campground");
+	// }
 }
 module.exports = seedDB;
