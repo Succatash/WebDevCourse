@@ -13,7 +13,7 @@ const commentsRoutes = require("./routes/comments"),
 	campgroundRoutes = require("./routes/campgrounds"),
 	indexRoutes = require("./routes/index");
 
-// seedDB();
+seedDB();
 
 //MongoDb and Database
 mongoose
