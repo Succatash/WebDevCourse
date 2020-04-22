@@ -4,29 +4,32 @@ const express = require("express"),
 	mongoose = require("mongoose"),
 	passport = require("passport"),
 	localStrategy = require("passport-local"),
-	Campgrounds = require("./models/campground");
-(Comment = require("./models/comment")), (User = require("./models/user"));
-seedDB = require("./seeds");
+	Campgrounds = require("./models/campground"),
+	Comment = require("./models/comment"),
+	User = require("./models/user"),
+	seedDB = require("./seeds"),
+	flash = require("connect-flash");
+methodOverride = require("method-override");
 // passportLocalMongoose = require("passport-local-mogoose");
 
 const commentsRoutes = require("./routes/comments"),
 	campgroundRoutes = require("./routes/campgrounds"),
 	indexRoutes = require("./routes/index");
 
-seedDB();
+// seedDB();
 
+const port = 3000;
 //MongoDb and Database
 mongoose
-	.connect("mongodb://localhost:27017/yelpCamp", {
+	.connect("mongodb://localhost/restful_blog_app", {
 		useNewUrlParser: true,
-		useUnifiedTopology: true
+		useUnifiedTopology: true,
+		useFindAndModify: false
 	})
 	.then(() => console.log("DB Connected!"))
 	.catch((err) => {
 		console.log(`DB Connection Error:${err.message}`);
 	});
-// seedDB();
-const port = 3000;
 
 /**
  * Passport Configuration
@@ -40,6 +43,7 @@ app.use(
 	})
 );
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -50,10 +54,13 @@ passport.deserializeUser(User.deserializeUser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(`${__dirname}/public`));
+app.use(methodOverride("_method"));
 
 //this provides middleware to every route
 app.use(function (req, res, next) {
-	res.locals, (currentUser = req.user);
+	res.locals.currentUser = req.user;
+	res.locals.success = req.flash("success");
+	res.locals.error = req.flash("error");
 	next();
 });
 

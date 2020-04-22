@@ -23,7 +23,15 @@
 					<p> 
 						<em> Submitted By <%= campgrounds.author["username"]%></em>
 					</p>
-				</div>
+					<% if(currentUser && campgrounds.author.id.equals(currentUser._id)){%>
+					<a class="btn btn-warning" href="/campgrounds/<%=campgrounds._id%>/edit">EDIT</a>
+
+					<form class="deleteForm" action="/campgrounds/<%=campgrounds._id%>?_method=DELETE" method="POST">
+					<button class="btn btn-danger">Delete</button>
+				</form>
+					<% } %>			
+					</div>
+
 			</div>
 					<div class="well">
 						<div class="text-right">
@@ -34,7 +42,25 @@
 									<div class="col-md-12">
 										<b><%= comment.author.username %></b>	
 									<span class="pull-right">10 days ago</span>
-								<p><%= comment.text%></p>
+
+								<p>
+									<%= comment.text%>
+								</p> 
+
+							</p>
+
+							<div class="pull-right">
+								<% if(currentUser && comment.author.id.equals(currentUser._id)){%>
+
+							<a href="/campgrounds/<%=campgrounds._id%>/comments/<%=comment._id%>/edit" class="btn btn-xs btn-warning">EDIT</a>
+							
+							<form  action="/campgrounds/<%=campgrounds._id%>/comments/<%=comment._id%>?_method=DELETE" method="POST" class="deleteForm">
+
+								<input type="submit" value="Delete" class="btn btn-xs btn-danger">
+							</form>
+	<% } %>
+            </div>
+          
 							</div>
 						</div>
 					<%})%>
