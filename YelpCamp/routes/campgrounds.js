@@ -31,6 +31,7 @@ router.get("/", (req, res) => {
 //Create Route -
 router.post("/", middleware.isLoggedIn, (req, res) => {
 	let name = req.body.name;
+	let price = req.body.price;
 	let image = req.body.image;
 	let desc = req.body.description;
 	// We create a object with name and image because it eqals are name attribute on the input tags
@@ -41,6 +42,7 @@ router.post("/", middleware.isLoggedIn, (req, res) => {
 	let newCampground = {
 		name: name,
 		image: image,
+		price: price,
 		description: desc,
 		author: author
 	};
