@@ -2,11 +2,7 @@
   "name": "webdevcourse",
   "version": "1.0.0",
   "description": "",
-  "main": ".eslintrc.js",
-  "dependencies": {
-    "nodemon": "^2.0.3"
-  },
-  "devDependencies": {},
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/Succatash/WebDevCourse/issues"
   },
-  "homepage": "https://github.com/Succatash/WebDevCourse#readme"
+  "homepage": "https://github.com/Succatash/WebDevCourse#readme",
+  "devDependencies": {}
 }
